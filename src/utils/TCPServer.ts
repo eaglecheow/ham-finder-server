@@ -14,6 +14,8 @@ export class TCPServer {
   private fileData: string = "";
   private fileSize: number = 0;
 
+  private dataCounter: number = 0;
+
   private _host: string;
   public get host(): string {
     return this._host;
@@ -78,6 +80,9 @@ export class TCPServer {
 
     } else {
       this.fileData += data;
+      this.dataCounter += 1;
+
+      Logger.debug(`Data Length: ${data.length} -- Data Counter: ${this.dataCounter}`);
     }
   };
 
