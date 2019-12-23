@@ -15,6 +15,7 @@ export class TCPServer {
   private fileSize: number = 0;
 
   private dataCounter: number = 0;
+  private dataLength: number = 0;
 
   private _host: string;
   public get host(): string {
@@ -70,6 +71,7 @@ export class TCPServer {
       let decoded = Buffer.from(this.fileData, "base64");
 
       Logger.info(`Decoded length: ${decoded.length}`);
+      Logger.info(`Received data length: ${this.dataLength}`);
 
       Fs.writeFile(this.fileOption.outputFileName, decoded, err => {
         if (err) throw err;
@@ -81,6 +83,7 @@ export class TCPServer {
     } else {
       this.fileData += data;
       this.dataCounter += 1;
+      this.dataLength += data.length;
 
       Logger.debug(`Data Length: ${data.length} -- Data Counter: ${this.dataCounter}`);
     }
