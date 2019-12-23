@@ -9,8 +9,8 @@ const Logger = Winston.createLogger({
     )
   ),
   transports: [
-    new Winston.transports.Console(),
-    new Winston.transports.File({ filename: "combined.log" })
+    new Winston.transports.Console({ level: "debug" }),
+    new Winston.transports.File({ filename: "combined.log", level: "silly" })
   ]
 });
 
