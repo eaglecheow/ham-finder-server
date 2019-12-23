@@ -81,11 +81,20 @@ export class TCPServer {
       });
 
     } else {
-      this.fileData += data;
-      this.dataCounter += 1;
-      this.dataLength += data.length;
 
-      Logger.debug(`Data Length: ${data.length} -- Data Counter: ${this.dataCounter}`);
+      if (dataString.includes("\r")) {
+        dataString = dataString.replace("\r", "");
+      }
+
+      if (dataString.includes("\n")) {
+        dataString = dataString.replace("\n", "");
+      }
+
+      this.fileData += dataString;
+      this.dataCounter += 1;
+      this.dataLength += dataString.length;
+
+      Logger.debug(`Data Length: ${dataString.length} -- Data Counter: ${this.dataCounter}`);
     }
   };
 
